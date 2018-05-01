@@ -41,7 +41,7 @@ def create_driver_session(session_id, executor_url):
 
 	return new_driver
 
-class CostarProcessor:
+class DirectoryProcessor:
 	def __init__(self, state, driver):
 		self.state = state	
 		self.driver = driver
@@ -102,7 +102,7 @@ class CostarProcessor:
 if __name__ == "__main__":
 	state = sys.argv[1]
 	driver2 = get_existing_session('selenium_details.csv')
-	costar = CostarProcessor(driver=driver2, state=state)
+	costar = DirectoryProcessor(driver=driver2, state=state)
 	costar.process_pages()
 	subse
 	
