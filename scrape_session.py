@@ -104,5 +104,4 @@ if __name__ == "__main__":
 	driver2 = get_existing_session('selenium_details.csv')
 	costar = DirectoryProcessor(driver=driver2, state=state)
 	costar.process_pages()
-	subse
 	
