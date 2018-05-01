@@ -1,5 +1,4 @@
 from selenium import webdriver
-from bs4 import BeautifulSoup
 from numpy.random import normal
 import pandas, time, sys, subprocess, format
 
@@ -29,14 +28,12 @@ def create_driver_session(session_id, executor_url):
 
 		# if we're creating a new session, mock success and return with existing session details
 		if command == "newSession":
-			return {'success': 0, 'value': None, 
-'sessionId': session_id}
+			return {'success': 0, 'value': None, 'sessionId': session_id}
 		# else return results of existing RemoteWebDriver method
 		else:
 			return org_command_execute(self, command, params)
 
 	# override execute method with our new function, and return existing session
-
 	RemoteWebDriver.execute = new_command_execute
 	new_driver = webdriver.Remote(command_executor=executor_url, desired_capabilities={})
 	new_driver.session_id = session_id
@@ -77,13 +74,14 @@ class CostarProcessor:
 					break
 				try:
 					listing = {'company': subitems[1], 'listing_agent': subitems[2], 'ou_or_inv': subitems[3], 
-'property_type': subitems[4], 'state': self.state}	
+							'property_type': subitems[4], 'state': self.state}	
 				except Exception as e:
 					print(str(e))
 					continue
 				print(listing)
 				listings.append(listing)
-			
+				
+			# switch back to default to continue to next page
 			self.driver.switch_to.default_content()
 			try:
 				self.driver.find_element_by_css_selector('div.nextGridControlButton').click()		
